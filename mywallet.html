@@ -1,0 +1,73 @@
+<head>
+	<title>My Wallet</title>
+</head>
+<body>
+<!-- 	<div class="container"> -->
+		<header>
+
+			<div id="navbar" class="navbar navbar-default " role="navigation">
+			    <div class="container-fluid">
+			        <div class="navbar-header"><a class="navbar-brand" href="#">My Wallet</a>
+			            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-menubuilder"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
+			            </button>
+			        </div>
+			        <div class="collapse navbar-collapse navbar-menubuilder">
+			            <ul class="nav navbar-nav navbar-left">
+			                <li><a href="#">{{> loginButtons }}</a></li>
+			            </ul>
+			        </div>
+			    </div>
+			</div>
+		</header>
+		
+		<div class="container">
+			<div class="panel panel-default">
+			  	<div class="panel-heading">
+					{{#if currentUser}}
+					<form class="new-item form-inline">
+						<div class="form-group">
+							<input type="text" class="form-control" name="item" placeholder="Expenses.. eg:Food" >
+							<input type="number" class="form-control" name="price" min="0" max="9999" step="0.01" placeholder="RM... eg:RM20" >
+							<input type="submit" class="btn btn-primary" name="submit" value="Add!">
+						</div>			
+					</form>
+					<br>
+					{{/if}}
+				</div>
+			  	<div class="panel-body">
+			    	{{> mainboard }}
+			 	</div>
+			</div>
+		</div>
+		
+			
+			
+			
+		
+
+	<!-- </div> -->
+</body>
+
+<template name="mainboard">
+	{{#if currentUser}}
+		<table class="table table-striped table-hover table-bordered">
+			<tbody>
+			{{#each budget}}
+				<tr>
+					<td class="col-md-4">{{item}}</td>
+					<td class="col-md-4">RM{{price}}</td>
+					<td class="col-md-4">{{date}}</td>
+					<td class="col-md-1"><button class="edit btn btn-warning">Edit</button></td>
+					<td class="col-md-1"><button class="delete btn btn-danger">Remove</button></td>	
+				</tr>
+			{{/each}}	
+			</tbody>	
+		</table>
+
+		<h2>Total: RM{{tprice}}</h2>
+	{{else}}
+
+		<p class="text-center">This featured only available for registered user.</p>
+	
+	{{/if}}
+</template>
